@@ -22,9 +22,7 @@ let state = props.dialogsPage;
    let body = e.target.value;
    props.updateNewMessageBody(body)
    }
- if (!props.isAuth ) {
-     return  <Navigate to="/login"/>
- }
+
     return (
 
         <div className={d.dialogs}>

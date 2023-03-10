@@ -10,6 +10,7 @@ import {
 
 import Users from "./Users";
 import Preloader from "../components/common/Preloader/Preloader";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 
 
@@ -55,13 +56,13 @@ const mapStateToProps = (state) => {
 
     }
 }
+let withRedirect = withAuthRedirect(UsersContainer)
 export default connect    (mapStateToProps,
 
     {
-
          setCurrentPage,
         toggleFollowingProgress,
         getUsers,
         followThunk,
         unfollowThunk,
-    })               (UsersContainer);
+    })               (withRedirect);
