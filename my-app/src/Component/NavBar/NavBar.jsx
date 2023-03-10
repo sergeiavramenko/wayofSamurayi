@@ -23,6 +23,9 @@ const NavBar = (props) => {
       <div className={n.item}>
         <NavLink to="/users" className = { navData => navData.isActive ? n.active : n.item }>Users</NavLink>
       </div>
+      <div className={n.item}>
+        <NavLink to="/login" className = { navData => navData.isActive ? n.active : n.item }>Login</NavLink>
+      </div>
    </div >
     );
 }

@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {getUserProfileThunk} from "../Redux/profile-reducer";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 
 
 class ProfileContainer extends React.Component {
@@ -20,16 +20,20 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+        if (!this.props.isAuth  ) {
+            return  <Navigate to="/login"/>
+        }
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile  {...this.props} profile={this.props.profile}/>
             </div>
         );
     }
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 let WithUrlDataContainerComponent = (props) => {
