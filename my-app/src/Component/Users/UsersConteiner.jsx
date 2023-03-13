@@ -16,8 +16,8 @@ import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
-    getPageSize,
-    getTotalUsersCount, requestUsers
+    getPageSize, getSuperReselect,
+    getTotalUsersCount, getUsersSuperSelector, requestUsers
 } from "../Redux/users-selectors";
 
 
@@ -66,12 +66,13 @@ this.props.getUsers(this.props.currentPage, this.props.pageSize)
 }*/
 const mapStateToProps = (state) => {
     return {
-        users: requestUsers(state),
+        users: getUsersSuperSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+
 
     }
 }
