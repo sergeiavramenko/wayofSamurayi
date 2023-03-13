@@ -1,6 +1,6 @@
-import state from "./State";
+
 import {authAPI, usersAPI} from "../../api/api";
-import {toggleFollowingProgress, unfollow} from "./users-reducer";
+
 
 const SET_USER_DATA = "SET_USER_DATA";
 
