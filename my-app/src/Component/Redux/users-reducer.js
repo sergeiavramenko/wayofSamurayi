@@ -108,38 +108,36 @@ export const toggleFollowingProgress = (isFetching, userId) => {
 }
 
 export const getUsers = (currentPage,pageSize) => {
-   return (dispatch) => {
+   return async (dispatch) => {
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize)
-        .then(data => {
+    let data = await usersAPI.getUsers(currentPage, pageSize);
             dispatch(setCurrentPage(currentPage))
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
-        })
+
 }}
+const followUnfollowFlow = async (dispatch, userId) => {
+
+}
 export const followThunk = ( userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
-        usersAPI.post(userId)
-            .then(data => {
+      let data = await usersAPI.post(userId);
                 if (data.resultCode == 0) {
                     dispatch(follow(userId));
                 }
                     dispatch(toggleFollowingProgress(false,userId))
-            })
     }}
 
 export const unfollowThunk = ( userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true,userId))
-        usersAPI.del(userId)
-            .then(data => {
+       let data = await usersAPI.del(userId);
                 if (data.resultCode == 0) {
                     dispatch(unfollow(userId));
                 }
                 dispatch(toggleFollowingProgress(false,userId))
-            })
     }}
 
 

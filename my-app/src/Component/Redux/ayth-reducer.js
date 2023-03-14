@@ -2,7 +2,7 @@
 import {authAPI, usersAPI} from "../../api/api";
 
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "samurai-network/aut/SET_USER_DATA";
 
 
 
@@ -32,15 +32,15 @@ export const setAuthUserdata = (Id, email, login) => {
         {type: SET_USER_DATA,  data: {Id, email, login} }
     )
 }
-export const getAythUserDataThunk = ( ) => {
-    return (dispatch) => {
-        authAPI.me().then(res => {
+export const getAythUserDataThunk = ( ) => { return  async (dispatch) => {
+    let res = await    authAPI.me();
+
 
             if (res.data.resultCode === 0) {
                 let {id, email, login} = res.data.data;
                 dispatch(setAuthUserdata(id, email, login))
             }
-        })
+
     }}
 
 

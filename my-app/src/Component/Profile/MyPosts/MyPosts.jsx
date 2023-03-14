@@ -6,7 +6,7 @@ import Post from "./Post/Post";
 
 
 const MyPosts = React.memo ((props) => {
-    console.log("memo")
+
     let PostsElement = props.posts.map( ex => <Post message={ex.name} likesCount={ex.likesCount} /> )
     let newPostElement = React.createRef();
     let Click = () => {
