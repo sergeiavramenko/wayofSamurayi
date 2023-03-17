@@ -4,6 +4,8 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+
  let initialState ={
      posts: [
          {name: "Dimasdasdasd", id: "1", likesCount: 112},
@@ -43,6 +45,12 @@ const profileReducer = (state = initialState , action) => {
                status: action.status
            }
        }
+       case SAVE_PHOTO_SUCCESS: {
+           return {
+               ...state,
+               profile: {...state.profile, photos: action.photos }
+           }
+       }
        default:
        return state;
        }
@@ -68,6 +76,11 @@ export const setStatus = (status) => {
         {type: SET_STATUS, status}
     )
 }
+export const savePhotoSucces = (photos) => {
+    return(
+        {type: SAVE_PHOTO_SUCCESS, photos}
+    )
+}
 export const getUserProfileThunk = (userId) => {
     return  async (dispatch) => {
         const res = await usersAPI.getProfile(userId);
@@ -87,6 +100,13 @@ export const updateStatus = (status) => {
                 if (res.data.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
+    }
+}
+export const savePhoto = (file) => {  return  async (dispatch) => {
+        let res = await profileAPI.savePhoto(file)
+        if (res.data.resultCode === 0) {
+            dispatch(savePhotoSucces(res.data.data.photos))
+        }
     }
 }
 
