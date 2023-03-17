@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import './App.css';  
+import './App.css';
 import NavBar from './Component/NavBar/NavBar';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React, {Suspense} from "react";
